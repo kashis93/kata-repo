@@ -3,6 +3,7 @@
   # 🏎️ AutoLot Gallery
   ### *Premier Automotive Dealership & Virtual 3D Showroom Platform*
 
+  [![Vercel Deployment](https://img.shields.io/badge/Vercel-Live_Demo-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://kata-repo-n87chtv8z-kashis93s-projects.vercel.app/)
   [![React](https://img.shields.io/badge/React-19.0-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
   [![Vite](https://img.shields.io/badge/Vite-6.2-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
   [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4.1-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
@@ -10,7 +11,6 @@
   [![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
   [![Three.js](https://img.shields.io/badge/Three.js-3D_Engine-black?style=for-the-badge&logo=three.js&logoColor=white)](https://threejs.org/)
   [![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
-  [![License](https://img.shields.io/badge/License-Apache_2.0-blue.style=for-the-badge)](LICENSE)
 
   <br />
 
@@ -19,9 +19,19 @@
   <br />
   <br />
 
-  [Explore Live App](http://localhost:3000) • [View API Docs](http://localhost:8000/docs) • [Report Issue](https://github.com/kashis93/kata-repo/issues)
+  [🌐 Live Vercel App](https://kata-repo-n87chtv8z-kashis93s-projects.vercel.app/) • [⚡ Production URL](https://kata-repo.vercel.app/) • [View API Docs](http://localhost:8000/docs) • [Report Issue](https://github.com/kashis93/kata-repo/issues)
 
 </div>
+
+---
+
+## 🌐 Live Deployment
+
+> [!IMPORTANT]
+> **Production Vercel URL**: [https://kata-repo-n87chtv8z-kashis93s-projects.vercel.app/](https://kata-repo-n87chtv8z-kashis93s-projects.vercel.app/)  
+> **Custom Domain**: [https://kata-repo.vercel.app/](https://kata-repo.vercel.app/)
+
+The application is deployed live on **Vercel** with continuous deployment integrated directly from the `main` branch.
 
 ---
 
@@ -92,12 +102,8 @@ kata-repo/
 │   ├── 📄 Dockerfile                  # Container Deployment Config
 │   └── 📄 requirements.txt
 │
-├── 📁 autolot-car-dealership (2)/      # TypeScript React SPA Codebase
+├── 📄 vercel.json                      # Vercel Deployment & Rewrites Configuration
 ├── 📄 .gitignore                       # Clean Git Ignore Exclusions
-├── 📄 index.html                       # Standalone Static Landing Page
-├── 📄 login.html                       # Standalone Static Login Page
-├── 📄 signup.html                      # Standalone Static Signup Page
-├── 📄 styles.css                       # Standalone CSS System
 └── 📄 README.md                        # Project Master Documentation
 ```
 
@@ -182,7 +188,7 @@ uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 
 - **Frontend**: React 19, Vite, Tailwind CSS v4, Lucide Icons, Three.js, Recharts, Canvas-Confetti
 - **Backend**: FastAPI, SQLAlchemy, Alembic, SQLite / PostgreSQL, Pydantic, Python-JOSE, Passlib
-- **DevOps**: Docker, Uvicorn, Git
+- **Deployment**: Vercel (Frontend SPA), Docker / Uvicorn (Backend)
 
 ---
 
