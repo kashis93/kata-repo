@@ -1,99 +1,201 @@
-# 🏎️ AutoLot Gallery — Premier Automotive Dealership Platform
+<div align="center">
 
-An end-to-end, production-ready automotive gallery and dealership web application built with **React 19, Vite, Tailwind CSS v4, Three.js 3D Showroom, and FastAPI Python Backend**.
+  # 🏎️ AutoLot Gallery
+  ### *Premier Automotive Dealership & Virtual 3D Showroom Platform*
 
-![AutoLot Gallery](https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&w=1200&q=80)
+  [![React](https://img.shields.io/badge/React-19.0-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+  [![Vite](https://img.shields.io/badge/Vite-6.2-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+  [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4.1-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+  [![FastAPI](https://img.shields.io/badge/FastAPI-0.109-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+  [![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+  [![Three.js](https://img.shields.io/badge/Three.js-3D_Engine-black?style=for-the-badge&logo=three.js&logoColor=white)](https://threejs.org/)
+  [![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
+  [![License](https://img.shields.io/badge/License-Apache_2.0-blue.style=for-the-badge)](LICENSE)
+
+  <br />
+
+  <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&w=1600&q=85" alt="AutoLot Gallery Hero Preview" width="100%" style="border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.3);" />
+
+  <br />
+  <br />
+
+  [Explore Live App](http://localhost:3000) • [View API Docs](http://localhost:8000/docs) • [Report Issue](https://github.com/kashis93/kata-repo/issues)
+
+</div>
 
 ---
 
-## ✨ Features
+## 📖 Overview
 
-- 🚗 **Curated Luxury Inventory**: Display 12+ high-performance vehicles (Porsche, Ferrari, Lamborghini, Aston Martin, Mercedes-AMG, McLaren, Audi RS, BMW M, Tesla, Chevrolet, Ford, Toyota).
-- 🖼️ **Full-Bleed Edge-to-Edge Hero Banner**: Featuring cinematic photography and color-matched typography.
-- 🔒 **Authentication System**: User registration, login, JWT token management, and role-based access control (Admin / Customer).
-- 🎮 **Interactive 3D Showroom**: 360° virtual turntable viewing powered by **Three.js** and Sketchfab 3D CAD mesh integration.
-- ⚡ **Side-by-Side Model Comparison**: Select multiple vehicles and compare technical specifications head-to-head.
-- 📄 **Monroney Window Sticker System**: View and print official factory specification stickers with CSV export.
-- 🛠️ **Admin Management Console**: Add, edit, delete fleet vehicles, manage allocations, and view real-time customer purchase orders.
-- 📱 **Fully Responsive Design**: Optimized for mobile, tablet, and desktop screens with glassmorphism UI tokens.
+**AutoLot Gallery** is a full-stack, enterprise-grade automotive dealership platform designed for luxury vehicle reservation, virtual showroom inspection, and dealership fleet management. 
+
+Featuring a **full-bleed edge-to-edge supercar hero banner**, **interactive 3D CAD showroom viewing**, **head-to-head model comparison**, **JWT authentication**, and **real-time backend inventory synchronization**, AutoLot Gallery delivers a state-of-the-art digital buying experience.
+
+> [!TIP]
+> **Live Demo Access**: The application features instant **⚡ Demo Admin** and **⚡ Demo Client** sign-in modes for immediate testing without manual database configuration.
+
+---
+
+## ✨ Key Features
+
+### 🏎️ 1. Curated Luxury Fleet
+- Browse 12+ high-performance supercars & luxury vehicles (Porsche 911 GT3 RS, Ferrari SF90 Stradale, Aston Martin DBS 770, Mercedes-AMG GT, Lamborghini Huracán, McLaren 750S, Audi RS e-tron GT, BMW M8, Tesla, Ford, Chevrolet, Toyota).
+- Filter by **Make**, **Body Type** (Coupe, SUV, Convertible, Electric, Wagon, Sedan), **Price Range**, and keyword search.
+
+### 🖼️ 2. Edge-to-Edge Hero Presentation
+- Full-bleed 100% viewport width hero section featuring glossy **Rosso Corsa Red Ferrari SF90 Stradale** photography.
+- High-contrast champagne gold typography and color-matched call-to-action controls.
+
+### 🔒 3. User & Admin Authentication
+- Built-in **Sign Up** and **Sign In** workflow using **FastAPI JWT Bearer tokens** and local storage persistence.
+- Role-based authorization distinguishing **Admin Console** operators from **VIP Clients**.
+
+### 🎮 4. Virtual 3D Showroom Stage
+- **3D CAD Mesh View (Sketchfab Engine)**: Interactive 3D car models supporting 360° drag rotation, pinch-zoom, and panning.
+- **Real Photo 360° Turntable**: Multi-angle studio photography switcher (3/4 Front, Side Profile, Rear 3/4, Direct Facing).
+
+### ⚡ 5. Side-by-Side Model Comparison
+- Dock up to 3 vehicles into a persistent bottom bar for head-to-head performance metric analysis.
+
+### 📄 6. Monroney Window Sticker Management
+- View and print official factory Monroney stickers detailing MSRP pricing, horsepower, transmission specs, VIN numbers, and standard equipment.
+- One-click **CSV Inventory Export**.
+
+### 🛠️ 7. Admin Control Panel
+- Complete fleet CRUD operations: Add new vehicles, modify stock quantities, update pricing, or delete sold units.
+- Real-time customer reservation orders log with timestamp tracking.
 
 ---
 
 ## 📁 Repository Structure
 
 ```
-incobyte/
-├── frontend/                       # React 19 + Vite + Tailwind CSS SPA
-│   ├── src/
-│   │   ├── components/            # UI Components (VehicleCard, Navbar, HeroBanner, Modals, AdminPanel)
-│   │   ├── context/               # AuthContext for JWT authentication & user sessions
-│   │   ├── data/                  # Curated vehicle fleet presets
-│   │   ├── pages/                 # Full pages (LoginPage, RegisterPage, Services, Financing, About, Contact)
-│   │   ├── services/              # API services (backend integration, carImageService, imageCache)
-│   │   ├── utils/                 # CSV export & sticker utilities
-│   │   ├── App.jsx                # Main Application Entry
-│   │   └── index.css              # Global Design Tokens & Tailwind Directives
-│   └── package.json
+kata-repo/
+├── 📁 frontend/                        # Production React 19 SPA (Vite + Tailwind CSS v4)
+│   ├── 📁 src/
+│   │   ├── 📁 components/             # UI Components (HeroBanner, Navbar, VehicleCard, Modals, AdminPanel)
+│   │   ├── 📁 context/                # AuthContext (JWT Tokens, Session Persistence, User Roles)
+│   │   ├── 📁 data/                   # Curated Luxury Vehicle Presets
+│   │   ├── 📁 pages/                  # Full Pages (LoginPage, RegisterPage, Services, Financing, About, Contact)
+│   │   ├── 📁 services/               # API Services (Backend client, carImageService, imageCache)
+│   │   ├── 📁 utils/                  # CSV Export & Monroney sticker utilities
+│   │   ├── 📄 App.jsx                 # Application Root Component
+│   │   └── 📄 index.css               # AutoLot Design Tokens & Tailwind Directives
+│   └── 📄 package.json
 │
-├── car-dealership-api/             # FastAPI Python Backend
-│   ├── app/
-│   │   ├── api/v1/                # REST endpoints (/auth, /vehicles)
-│   │   ├── core/                  # Security & configuration settings
-│   │   ├── db/                    # SQLAlchemy models & sessions
-│   │   └── services/              # Business logic & authentication service
-│   ├── Dockerfile                 # Container deployment configuration
-│   └── requirements.txt           # Python dependencies
+├── 📁 car-dealership-api/              # FastAPI Python Backend Service
+│   ├── 📁 app/
+│   │   ├── 📁 api/v1/                 # REST endpoints (/auth/register, /auth/login, /vehicles)
+│   │   ├── 📁 core/                   # Security, Password Hashing (Bcrypt), JWT Tokens
+│   │   ├── 📁 db/                     # SQLAlchemy ORM Models & DB Sessions
+│   │   └── 📁 services/               # Auth & Vehicle Service Layer
+│   ├── 📄 Dockerfile                  # Container Deployment Config
+│   └── 📄 requirements.txt
 │
-├── index.html                      # Standalone static landing preview
-├── login.html                      # Standalone static login page
-├── signup.html                     # Standalone static signup page
-├── styles.css                      # Standalone CSS design system
-└── README.md                       # Master Documentation
+├── 📁 autolot-car-dealership (2)/      # TypeScript React SPA Codebase
+├── 📄 .gitignore                       # Clean Git Ignore Exclusions
+├── 📄 index.html                       # Standalone Static Landing Page
+├── 📄 login.html                       # Standalone Static Login Page
+├── 📄 signup.html                      # Standalone Static Signup Page
+├── 📄 styles.css                       # Standalone CSS System
+└── 📄 README.md                        # Project Master Documentation
 ```
 
 ---
 
-## 🚀 Quick Start Guide
+## ⚡ Quick Start Guide
 
-### 1. Run the Frontend (React + Vite)
+### Prerequisites
+- [Node.js (v18+)](https://nodejs.org/)
+- [Python (v3.10+)](https://www.python.org/)
+
+---
+
+### 1. Launch the Frontend Web App
+
 ```bash
+# Navigate to frontend directory
 cd frontend
+
+# Install Node dependencies
 npm install
+
+# Start Vite Development Server
 npm run dev
 ```
-Open **`http://localhost:3000`** in your browser.
 
-### 2. Run the Backend API (FastAPI)
+> The React frontend will run at **`http://localhost:3000`**.
+
+---
+
+### 2. Launch the FastAPI Backend API
+
 ```bash
+# Navigate to backend directory
 cd car-dealership-api
-python -m venv venv
-# Windows:
-.\venv\Scripts\activate
-# Linux/macOS:
-source venv/bin/svg/activate
 
+# Create & activate Python virtual environment
+python -m venv venv
+
+# Windows PowerShell:
+.\venv\Scripts\Activate.ps1
+
+# Linux / macOS:
+source venv/bin/activate
+
+# Install requirements
 pip install -r requirements.txt
+
+# Start Uvicorn API Server
 uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 ```
-API Documentation will be available at **`http://localhost:8000/docs`**.
+
+> FastAPI Interactive Documentation will be live at **`http://localhost:8000/docs`**.
 
 ---
 
-## 🔐 Credentials & Quick Demo Accounts
+## 🔑 Quick Demo Credentials
 
-- **Admin Account**: `admin@autolot.com` / `adminpassword` (Access to Admin Console)
-- **Customer Account**: `client@autolot.com` / `clientpassword`
+| Role | Email | Password | Access Privileges |
+| :--- | :--- | :--- | :--- |
+| **Administrator** | `admin@autolot.com` | `adminpassword` | Full Inventory CRUD, Order Logs, Admin Console |
+| **VIP Client** | `client@autolot.com` | `clientpassword` | Vehicle Reservations, Favorites, Comparisons |
 
 ---
 
-## 🛠️ Technology Stack
+## 🔌 Core API Endpoints
 
-- **Frontend**: React 19, Vite, Tailwind CSS v4, Lucide Icons, Three.js, Recharts, Canvas-Confetti, Motion
-- **Backend**: FastAPI, SQLAlchemy, Alembic, SQLite / PostgreSQL, Pydantic, Passlib (Bcrypt), Python-JOSE
-- **DevOps**: Docker, Uvicorn, Vercel / Netlify ready
+| Method | Endpoint | Description | Auth Required |
+| :--- | :--- | :--- | :---: |
+| `POST` | `/api/auth/register` | Register a new user account | ❌ |
+| `POST` | `/api/auth/login` | Authenticate and receive JWT Bearer token | ❌ |
+| `GET` | `/api/auth/me` | Fetch active user profile details | 🔒 |
+| `GET` | `/api/vehicles` | Fetch all inventory vehicles | ❌ |
+| `POST` | `/api/vehicles` | Add a new vehicle to inventory | 🔒 Admin |
+| `PUT` | `/api/vehicles/{id}` | Update existing vehicle specs | 🔒 Admin |
+| `DELETE` | `/api/vehicles/{id}` | Delete a vehicle from inventory | 🔒 Admin |
+| `POST` | `/api/vehicles/{id}/purchase` | Record a customer reservation | ❌ |
+
+---
+
+## 💻 Tech Stack Summary
+
+- **Frontend**: React 19, Vite, Tailwind CSS v4, Lucide Icons, Three.js, Recharts, Canvas-Confetti
+- **Backend**: FastAPI, SQLAlchemy, Alembic, SQLite / PostgreSQL, Pydantic, Python-JOSE, Passlib
+- **DevOps**: Docker, Uvicorn, Git
+
+---
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/kashis93/kata-repo/issues).
 
 ---
 
 ## 📝 License
 
-Distributed under the Apache-2.0 License.
+Distributed under the Apache-2.0 License. See `LICENSE` for more information.
+
+<div align="center">
+  <sub>Built with ❤️ by <a href="https://github.com/kashis93">kashis93</a></sub>
+</div>
