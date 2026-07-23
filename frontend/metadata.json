@@ -1,6 +1,0 @@
-{
-  "name": "AutoLot Car Dealership",
-  "description": "3D Interactive Car Dealership & Inventory Management System with real vehicle models, 3D showroom, search filters, window stickers, and admin inventory controls.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}
