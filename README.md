@@ -35,6 +35,22 @@ The application is deployed live on **Vercel** with continuous deployment integr
 
 ---
 
+## 🤖 My AI Usage
+
+### 🛠️ AI Tools Used
+- **Google Gemini / Antigravity AI Assistant**: Used as an agentic pair programmer throughout the full-stack software development lifecycle.
+
+### 💡 How AI Was Used
+1. **Frontend Architecture & Design System**: Used AI prompts to generate dark-mode luxury design tokens, Tailwind v4 utility styles, responsive vehicle inventory grid cards, and interactive modal dialogs.
+2. **3D Interactive Showroom & Stage**: Prompted AI to build `ThreeDShowroomModal.jsx` integrating Sketchfab 3D CAD mesh embeds and multi-angle studio photo turntable controls.
+3. **FastAPI Backend & Security**: Used AI assistant to scaffold SQLAlchemy ORM models, bcrypt password hashing, and JWT token authentication routines.
+4. **Monorepo Deployment**: Worked with AI to configure `vercel.json` rewrite rules and resolve monorepo SPA routing for seamless Vercel deployment.
+
+### 🧠 Workflow Reflection & Impact
+Leveraging AI as a collaborative pair programmer dramatically accelerated development velocity. It enabled rapid prototyping of modern React 19 UI components, automated complex boilerplate setup for FastAPI and SQLAlchemy, and provided immediate troubleshooting for Vercel deployment configurations.
+
+---
+
 ## 📖 Overview
 
 **AutoLot Gallery** is a full-stack, enterprise-grade automotive dealership platform designed for luxury vehicle reservation, virtual showroom inspection, and dealership fleet management. 
@@ -103,6 +119,7 @@ kata-repo/
 │   └── 📄 requirements.txt
 │
 ├── 📄 vercel.json                      # Vercel Deployment & Rewrites Configuration
+├── 📄 PROMPTS.md                       # AI Tooling & Prompt History Log
 ├── 📄 .gitignore                       # Clean Git Ignore Exclusions
 └── 📄 README.md                        # Project Master Documentation
 ```
