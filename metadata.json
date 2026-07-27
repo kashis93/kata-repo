@@ -1,0 +1,6 @@
+{
+  "name": "CariusX - Luxury & Supercar Showcase",
+  "description": "CariusX high-performance vehicle inventory dealership and 3D showroom web application.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
