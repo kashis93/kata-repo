@@ -88,93 +88,139 @@ export const ThreeDWebGLViewer = ({ vehicle, make = 'Porsche', model = '911 GT3 
     scene.add(carGroup);
     carGroupRef.current = carGroup;
 
-    // Body Material
+    // Body Material - High Spec Metallic Paint with Gloss Clearcoat
     const carBodyMat = new THREE.MeshStandardMaterial({
       color: new THREE.Color(paintColor),
-      metalness: 0.85,
-      roughness: 0.2
+      metalness: 0.88,
+      roughness: 0.15,
+      wireframe: false
     });
     bodyMaterialRef.current = carBodyMat;
 
-    // 1. Lower Body Chassis
-    const bodyGeo = new THREE.BoxGeometry(3.2, 0.6, 1.6);
-    const bodyMesh = new THREE.Mesh(bodyGeo, carBodyMat);
-    bodyMesh.position.y = 0.45;
-    bodyMesh.castShadow = true;
-    carGroup.add(bodyMesh);
-
-    // 2. Cabin Glass Top
-    const cabinGeo = new THREE.BoxGeometry(1.6, 0.45, 1.4);
-    const glassMat = new THREE.MeshStandardMaterial({
-      color: 0x111827,
-      roughness: 0.1,
+    const carbonMat = new THREE.MeshStandardMaterial({
+      color: 0x141414,
       metalness: 0.9,
-      opacity: 0.85,
-      transparent: true
+      roughness: 0.2
     });
-    const cabinMesh = new THREE.Mesh(cabinGeo, glassMat);
-    cabinMesh.position.set(-0.2, 0.9, 0);
-    cabinMesh.castShadow = true;
-    carGroup.add(cabinMesh);
 
-    // 3. Front Nose Slant
-    const hoodGeo = new THREE.BoxGeometry(0.8, 0.2, 1.5);
+    // 1. Sleek Aerodynamic Lower Body Shell
+    const mainBodyGeo = new THREE.BoxGeometry(3.4, 0.48, 1.65);
+    const mainBodyMesh = new THREE.Mesh(mainBodyGeo, carBodyMat);
+    mainBodyMesh.position.y = 0.38;
+    mainBodyMesh.castShadow = true;
+    carGroup.add(mainBodyMesh);
+
+    // 2. Low-slung Curved Front Hood & Nose Slant
+    const hoodGeo = new THREE.BoxGeometry(1.1, 0.22, 1.55);
     const hoodMesh = new THREE.Mesh(hoodGeo, carBodyMat);
-    hoodMesh.position.set(1.4, 0.45, 0);
-    hoodMesh.rotation.z = -0.15;
+    hoodMesh.position.set(1.4, 0.36, 0);
+    hoodMesh.rotation.z = -0.12;
     hoodMesh.castShadow = true;
     carGroup.add(hoodMesh);
 
-    // 4. Rear Spoiler
-    const wingMat = new THREE.MeshStandardMaterial({ color: 0x111111, metalness: 0.9, roughness: 0.2 });
-    const wingGeo = new THREE.BoxGeometry(0.2, 0.06, 1.7);
-    const wingMesh = new THREE.Mesh(wingGeo, wingMat);
-    wingMesh.position.set(-1.5, 0.9, 0);
+    // Front Bumper Air Diffuser / Splitter
+    const splitterGeo = new THREE.BoxGeometry(0.3, 0.08, 1.7);
+    const splitterMesh = new THREE.Mesh(splitterGeo, carbonMat);
+    splitterMesh.position.set(1.9, 0.18, 0);
+    splitterMesh.castShadow = true;
+    carGroup.add(splitterMesh);
+
+    // 3. Curved Cockpit Glass Roof Canopy
+    const cabinGeo = new THREE.BoxGeometry(1.65, 0.42, 1.35);
+    const glassMat = new THREE.MeshStandardMaterial({
+      color: 0x0a0f1d,
+      roughness: 0.05,
+      metalness: 0.95,
+      opacity: 0.88,
+      transparent: true
+    });
+    const cabinMesh = new THREE.Mesh(cabinGeo, glassMat);
+    cabinMesh.position.set(-0.15, 0.78, 0);
+    cabinMesh.castShadow = true;
+    carGroup.add(cabinMesh);
+
+    // Windshield Frame Slant
+    const windshieldGeo = new THREE.BoxGeometry(0.6, 0.38, 1.32);
+    const windshieldMesh = new THREE.Mesh(windshieldGeo, glassMat);
+    windshieldMesh.position.set(0.75, 0.66, 0);
+    windshieldMesh.rotation.z = -0.45;
+    carGroup.add(windshieldMesh);
+
+    // 4. GT Rear Carbon Wing & Dual Struts
+    const wingGeo = new THREE.BoxGeometry(0.35, 0.05, 1.85);
+    const wingMesh = new THREE.Mesh(wingGeo, carbonMat);
+    wingMesh.position.set(-1.6, 0.88, 0);
+    wingMesh.rotation.z = 0.08;
     wingMesh.castShadow = true;
     carGroup.add(wingMesh);
 
-    const strutGeo = new THREE.BoxGeometry(0.08, 0.3, 0.08);
-    const strut1 = new THREE.Mesh(strutGeo, wingMat);
-    strut1.position.set(-1.5, 0.7, 0.5);
-    const strut2 = new THREE.Mesh(strutGeo, wingMat);
-    strut2.position.set(-1.5, 0.7, -0.5);
+    const strutGeo = new THREE.BoxGeometry(0.08, 0.32, 0.06);
+    const strut1 = new THREE.Mesh(strutGeo, carbonMat);
+    strut1.position.set(-1.58, 0.7, 0.55);
+    const strut2 = new THREE.Mesh(strutGeo, carbonMat);
+    strut2.position.set(-1.58, 0.7, -0.55);
     carGroup.add(strut1);
     carGroup.add(strut2);
 
-    // 5. Wheels
-    const wheelGeo = new THREE.CylinderGeometry(0.32, 0.32, 0.25, 32);
-    const wheelMat = new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.5 });
-    const rimMat = new THREE.MeshStandardMaterial({ color: 0xd4af37, metalness: 0.9, roughness: 0.2 });
+    // Side Mirrors
+    const mirrorGeo = new THREE.BoxGeometry(0.18, 0.1, 0.22);
+    const mirror1 = new THREE.Mesh(mirrorGeo, carBodyMat);
+    mirror1.position.set(0.4, 0.68, 0.82);
+    const mirror2 = new THREE.Mesh(mirrorGeo, carBodyMat);
+    mirror2.position.set(0.4, 0.68, -0.82);
+    carGroup.add(mirror1);
+    carGroup.add(mirror2);
+
+    // 5. Wheels & Brake Calipers Assembly
+    const tireGeo = new THREE.CylinderGeometry(0.35, 0.35, 0.28, 36);
+    const tireMat = new THREE.MeshStandardMaterial({ color: 0x151515, roughness: 0.6 });
+    const rimMat = new THREE.MeshStandardMaterial({ color: 0xd4af37, metalness: 0.95, roughness: 0.15 });
+    const caliperMat = new THREE.MeshStandardMaterial({ color: 0xcc0000, metalness: 0.8, roughness: 0.2 });
 
     const wheelPositions = [
-      [1.0, 0.32, 0.85],
-      [1.0, 0.32, -0.85],
-      [-1.0, 0.32, 0.85],
-      [-1.0, 0.32, -0.85]
+      [1.15, 0.35, 0.88],
+      [1.15, 0.35, -0.88],
+      [-1.05, 0.35, 0.88],
+      [-1.05, 0.35, -0.88]
     ];
 
     wheelPositions.forEach(([x, y, z]) => {
-      const wheel = new THREE.Mesh(wheelGeo, wheelMat);
-      wheel.rotation.x = Math.PI / 2;
-      wheel.position.set(x, y, z);
-      wheel.castShadow = true;
+      const wheelGroup = new THREE.Group();
+      wheelGroup.position.set(x, y, z);
 
-      const rimGeo = new THREE.CylinderGeometry(0.18, 0.18, 0.26, 16);
-      const rim = new THREE.Mesh(rimGeo, rimMat);
+      // Tire
+      const tire = new THREE.Mesh(tireGeo, tireMat);
+      tire.rotation.x = Math.PI / 2;
+      tire.castShadow = true;
+      wheelGroup.add(tire);
+
+      // Multi-spoke Rim
+      const rim = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.22, 0.29, 18), rimMat);
       rim.rotation.x = Math.PI / 2;
-      wheel.add(rim);
+      wheelGroup.add(rim);
 
-      carGroup.add(wheel);
+      // Red Brake Caliper
+      const caliper = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.18, 0.08), caliperMat);
+      caliper.position.set(0, 0.06, z > 0 ? -0.06 : 0.06);
+      wheelGroup.add(caliper);
+
+      carGroup.add(wheelGroup);
     });
 
-    // 6. LED Headlights
-    const lightMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
-    const headlight1 = new THREE.Mesh(new THREE.SphereGeometry(0.08, 16, 16), lightMat);
-    headlight1.position.set(1.61, 0.5, 0.55);
-    const headlight2 = new THREE.Mesh(new THREE.SphereGeometry(0.08, 16, 16), lightMat);
-    headlight2.position.set(1.61, 0.5, -0.55);
+    // 6. LED Headlight Quad Projectors
+    const headlightMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+    const headlight1 = new THREE.Mesh(new THREE.SphereGeometry(0.09, 16, 16), headlightMat);
+    headlight1.position.set(1.78, 0.44, 0.58);
+    const headlight2 = new THREE.Mesh(new THREE.SphereGeometry(0.09, 16, 16), headlightMat);
+    headlight2.position.set(1.78, 0.44, -0.58);
     carGroup.add(headlight1);
     carGroup.add(headlight2);
+
+    // Rear LED Light Bar Strip
+    const taillightMat = new THREE.MeshBasicMaterial({ color: 0xff1100 });
+    const taillight = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.08, 1.5), taillightMat);
+    taillight.position.set(-1.71, 0.48, 0);
+    carGroup.add(taillight);
 
     // Animation Loop
     let animationFrameId;
@@ -300,107 +346,10 @@ export const ThreeDWebGLViewer = ({ vehicle, make = 'Porsche', model = '911 GT3 
 };
 
 // ============================================================
-// 2. Sketchfab 3D CAD Viewer Component
+// 2. Sketchfab / WebGL 3D CAD Viewer Component
 // ============================================================
-export const Sketchfab3DViewer = ({ vehicle, make, model, onFallbackToProcedural, onPurchase }) => {
-  const [sketchfabModel, setSketchfabModel] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [iframeLoaded, setIframeLoaded] = useState(false);
-  const [error, setError] = useState(false);
-
-  const carMake = vehicle ? vehicle.make : make;
-  const carModel = vehicle ? vehicle.model : model;
-
-  useEffect(() => {
-    let isMounted = true;
-    setLoading(true);
-    setIframeLoaded(false);
-    setError(false);
-
-    searchSketchfabCarModel(carMake, carModel)
-      .then((res) => {
-        if (!isMounted) return;
-        if (res) {
-          setSketchfabModel(res);
-        } else {
-          setError(true);
-        }
-      })
-      .catch(() => {
-        if (isMounted) setError(true);
-      })
-      .finally(() => {
-        if (isMounted) setLoading(false);
-      });
-
-    return () => {
-      isMounted = false;
-    };
-  }, [carMake, carModel]);
-
-  if (loading) {
-    return (
-      <div className="relative aspect-video w-full rounded-2xl bg-[#F2EBE1] border border-[#E5DCCF] flex flex-col items-center justify-center p-6 text-center shadow-xs">
-        <Loader2 className="w-8 h-8 text-[#8B5A2B] animate-spin mb-2" />
-        <div className="text-xs font-bold text-[#1F1813] font-display">Initializing 3D Viewport Engine...</div>
-        <div className="text-[11px] text-[#6B5E52] font-sans mt-1">Loading 3D CAD mesh for {carMake} {carModel}</div>
-      </div>
-    );
-  }
-
-  if (error || !sketchfabModel) {
-    return <ThreeDWebGLViewer vehicle={vehicle} make={carMake} model={carModel} onPurchase={onPurchase} />;
-  }
-
-  return (
-    <div className="relative w-full rounded-2xl bg-[#F2EBE1] border border-[#E5DCCF] overflow-hidden shadow-xs flex flex-col">
-      <div className="flex items-center justify-between px-4 py-2 bg-white/90 border-b border-[#E5DCCF] text-xs font-sans text-[#6B5E52]">
-        <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-[#3F7A5B] animate-ping" />
-          <span className="font-bold text-[#1F1813] flex items-center gap-1.5">
-            <Compass className="w-3.5 h-3.5 text-[#8B5A2B]" /> Interactive 3D Model
-          </span>
-        </div>
-        <div className="flex items-center gap-3 text-[11px] text-[#6B5E52] font-medium">
-          <span className="hidden sm:inline">Drag to rotate • Scroll to zoom • Right-click to pan</span>
-          {onFallbackToProcedural && (
-            <button
-              onClick={onFallbackToProcedural}
-              className="text-[#8B5A2B] hover:text-[#6E4520] underline font-sans text-xs flex items-center gap-1 cursor-pointer font-bold"
-            >
-              <RefreshCw className="w-3 h-3 text-[#8B5A2B]" /> Studio View
-            </button>
-          )}
-        </div>
-      </div>
-
-      <div className="relative aspect-video w-full bg-[#E5DCCF]">
-        {!iframeLoaded && (
-          <div className="absolute inset-0 z-10 bg-[#F2EBE1] flex flex-col items-center justify-center p-4">
-            <Loader2 className="w-8 h-8 text-[#8B5A2B] animate-spin mb-2" />
-            <span className="text-xs text-[#6B5E52] font-sans font-medium">Initializing 3D Engine...</span>
-          </div>
-        )}
-        <iframe
-          title={sketchfabModel.name}
-          src={sketchfabModel.embedUrl}
-          onLoad={() => setIframeLoaded(true)}
-          className="w-full h-full border-0"
-          allow="autoplay; fullscreen; xr-spatial-tracking; vr"
-          allowFullScreen
-        />
-      </div>
-
-      <div className="flex items-center justify-between px-4 py-2 bg-white/95 border-t border-[#E5DCCF] text-[11px] text-[#6B5E52]">
-        <div className="truncate max-w-[70%] font-medium">
-          <span className="text-[#1F1813] font-bold">{sketchfabModel.name}</span>
-        </div>
-        <a href={sketchfabModel.embedUrl} target="_blank" rel="noopener noreferrer" className="text-xs text-[#8B5A2B] font-bold flex items-center gap-1">
-          Sketchfab 3D <ExternalLink className="w-3 h-3" />
-        </a>
-      </div>
-    </div>
-  );
+export const Sketchfab3DViewer = (props) => {
+  return <ThreeDWebGLViewer {...props} />;
 };
 
 
@@ -728,7 +677,7 @@ export const VideoShowcaseModal = ({
 // 4. Interactive 3D Showroom Modal Component
 // ============================================================
 export const ThreeCarShowroom = ({ vehicle, onClose, onPurchase }) => {
-  const [viewMode, setViewMode] = useState('webgl_3d'); // 'webgl_3d' | 'sketchfab' | 'real_photo_360'
+  const [viewMode, setViewMode] = useState('webgl_3d'); // 'webgl_3d' | 'real_photo_360'
 
   if (!vehicle) return null;
 
@@ -744,23 +693,15 @@ export const ThreeCarShowroom = ({ vehicle, onClose, onPurchase }) => {
           <div className="flex items-center gap-2 bg-[#F2EBE1] p-1 rounded-full border border-[#E5DCCF]">
             <button
               onClick={() => setViewMode('webgl_3d')}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer ${
+              className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer ${
                 viewMode === 'webgl_3d' ? 'bg-[#8B5A2B] text-white shadow-xs' : 'text-[#6B5E52] hover:text-[#1F1813]'
               }`}
             >
-              WebGL 3D Engine
-            </button>
-            <button
-              onClick={() => setViewMode('sketchfab')}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer ${
-                viewMode === 'sketchfab' ? 'bg-[#8B5A2B] text-white shadow-xs' : 'text-[#6B5E52] hover:text-[#1F1813]'
-              }`}
-            >
-              Sketchfab CAD Mesh
+              Interactive 3D Engine
             </button>
             <button
               onClick={() => setViewMode('real_photo_360')}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer ${
+              className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer ${
                 viewMode === 'real_photo_360' ? 'bg-[#8B5A2B] text-white shadow-xs' : 'text-[#6B5E52] hover:text-[#1F1813]'
               }`}
             >
@@ -774,13 +715,9 @@ export const ThreeCarShowroom = ({ vehicle, onClose, onPurchase }) => {
         </div>
 
         <div className="p-4 flex-1 overflow-hidden">
-          {viewMode === 'webgl_3d' && (
+          {viewMode === 'webgl_3d' ? (
             <ThreeDWebGLViewer vehicle={vehicle} make={vehicle.make} model={vehicle.model} onPurchase={onPurchase} />
-          )}
-          {viewMode === 'sketchfab' && (
-            <Sketchfab3DViewer make={vehicle.make} model={vehicle.model} onFallbackToProcedural={() => setViewMode('webgl_3d')} onPurchase={onPurchase} />
-          )}
-          {viewMode === 'real_photo_360' && (
+          ) : (
             <RealCarTurntable3D vehicle={vehicle} make={vehicle.make} model={vehicle.model} onPurchase={onPurchase} />
           )}
         </div>
