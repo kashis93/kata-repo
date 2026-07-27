@@ -5,16 +5,15 @@ import heroVideo from '../herosection.mp4';
 
 export const HeroBanner = ({ onOpen3DStage, onOpenVideoStudio }) => {
   const bgVideoRef = useRef(null);
-  const [isBgMuted, setIsBgMuted] = useState(false); // Try unmuted by default
+  const [isBgMuted, setIsBgMuted] = useState(false);
   const [isBgPlaying, setIsBgPlaying] = useState(true);
 
   useEffect(() => {
     const video = bgVideoRef.current;
     if (!video) return;
 
-    // Set high quality rendering attributes
     video.currentTime = 0;
-    video.muted = false; // Enable audio with video start
+    video.muted = false;
 
     const playPromise = video.play();
     if (playPromise !== undefined) {
@@ -24,13 +23,11 @@ export const HeroBanner = ({ onOpen3DStage, onOpenVideoStudio }) => {
           setIsBgMuted(false);
         })
         .catch((err) => {
-          console.warn('Unmuted autoplay prevented by browser policy, attempting muted fallback until first user interaction:', err);
-          // Fallback to muted playback if browser blocks unmuted autoplay on load
+          console.warn('Unmuted autoplay prevented by browser policy, fallback to muted autoplay:', err);
           video.muted = true;
           setIsBgMuted(true);
           video.play().then(() => setIsBgPlaying(true)).catch(() => {});
 
-          // Unmute automatically on first user click anywhere on page
           const enableAudioOnUserInteraction = () => {
             if (bgVideoRef.current) {
               bgVideoRef.current.muted = false;
@@ -66,9 +63,9 @@ export const HeroBanner = ({ onOpen3DStage, onOpenVideoStudio }) => {
   };
 
   return (
-    <div className="relative w-full overflow-hidden text-white min-h-[90vh] sm:min-h-[92vh] flex items-center justify-center border-b border-red-950/40 bg-black">
+    <div className="relative w-full overflow-hidden text-white min-h-[90vh] sm:min-h-[92vh] flex items-center justify-center border-b border-[#E5DCCF]/20 bg-[#120E13]">
 
-      {/* Crisp Ultra-HD Video Background */}
+      {/* Ultra-HD Hardware Accelerated Background Video */}
       <video
         ref={bgVideoRef}
         src={heroVideo}
@@ -76,17 +73,23 @@ export const HeroBanner = ({ onOpen3DStage, onOpenVideoStudio }) => {
         loop
         playsInline
         preload="auto"
-        className="absolute inset-0 w-full h-full object-cover z-0 filter brightness-105 contrast-105 scale-[1.01]"
+        style={{
+          objectFit: 'cover',
+          objectPosition: 'center',
+          transform: 'translateZ(0)',
+          backfaceVisibility: 'hidden'
+        }}
+        className="absolute inset-0 w-full h-full object-cover z-0 filter brightness-105 contrast-105"
       />
 
-      {/* Clean Subtle Overlay Gradients (Preserving high-definition video clarity) */}
-      <div className="absolute inset-0 z-[1] bg-gradient-to-t from-black/80 via-black/25 to-black/50" />
-      <div className="absolute inset-0 z-[1] bg-gradient-to-r from-black/50 via-transparent to-black/50" />
+      {/* Crystal Clear Light Overlay Gradient to ensure max video visibility & sharp text contrast */}
+      <div className="absolute inset-0 z-[1] bg-gradient-to-t from-[#120E13]/85 via-black/20 to-[#120E13]/40" />
+      <div className="absolute inset-0 z-[1] bg-black/15 pointer-events-none" />
 
-      {/* Ambient Lighting Accents */}
+      {/* Subtle Luxury Ambient Lighting Accent */}
       <div className="absolute inset-0 w-full h-full z-[2] pointer-events-none">
-        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[300px] rounded-full bg-red-600/15 blur-[180px]" />
-        <div className="absolute bottom-10 right-10 w-[400px] h-[400px] rounded-full bg-amber-500/10 blur-[160px]" />
+        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[300px] rounded-full bg-[#8B5A2B]/15 blur-[160px]" />
+        <div className="absolute bottom-10 right-10 w-[400px] h-[400px] rounded-full bg-[#D4AF37]/10 blur-[160px]" />
       </div>
 
       {/* Hero Central Content Container */}
@@ -97,31 +100,23 @@ export const HeroBanner = ({ onOpen3DStage, onOpenVideoStudio }) => {
           initial={{ opacity: 0, y: -15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-black/60 border border-red-500/40 backdrop-blur-xl shadow-lg shadow-red-950/40"
+          className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-[#120E13]/80 border border-[#D4AF37]/60 backdrop-blur-xl shadow-lg shadow-black/70"
         >
-          <span className="w-2 h-2 rounded-full bg-red-500 animate-ping" />
-          <span className="text-xs font-mono font-bold text-amber-300 uppercase tracking-widest">
+          <span className="w-2 h-2 rounded-full bg-[#D4AF37] animate-ping" />
+          <span className="text-xs font-mono font-bold text-[#F5E6C8] uppercase tracking-widest">
             OFFICIAL AUTOLOT GALLERY SHOWROOM
           </span>
         </motion.div>
 
-        {/* Main Heading */}
+        {/* Main Heading with High-Contrast Shadows & Matched Palette */}
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.15 }}
-          className="text-4xl sm:text-6xl lg:text-7xl font-black font-display tracking-tight leading-[1.05] uppercase text-white select-none max-w-4xl"
-          style={{
-            textShadow: '0 10px 30px rgba(0,0,0,0.9), 0 4px 15px rgba(239, 68, 68, 0.6), 0 0 60px rgba(245, 158, 11, 0.35)'
-          }}
+          className="text-4xl sm:text-6xl lg:text-7xl font-black font-display tracking-tight leading-[1.05] uppercase text-white select-none max-w-4xl drop-shadow-[0_6px_20px_rgba(0,0,0,0.95)]"
         >
           <span>EXPERIENCE </span>
-          <span
-            className="bg-gradient-to-r from-red-500 via-amber-300 to-amber-400 bg-clip-text text-transparent inline-block"
-            style={{
-              filter: 'drop-shadow(0px 8px 25px rgba(239, 68, 68, 0.6)) drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.9))'
-            }}
-          >
+          <span className="bg-gradient-to-r from-[#F5E6C8] via-[#D4AF37] to-[#8B5A2B] bg-clip-text text-transparent inline-block drop-shadow-[0_6px_20px_rgba(0,0,0,0.95)]">
             CURATED LUXURY.
           </span>
         </motion.h1>
@@ -131,7 +126,7 @@ export const HeroBanner = ({ onOpen3DStage, onOpenVideoStudio }) => {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.25 }}
-          className="text-base sm:text-lg text-slate-200 font-sans font-medium leading-relaxed max-w-2xl drop-shadow-md"
+          className="text-base sm:text-lg text-white font-sans font-semibold leading-relaxed max-w-2xl drop-shadow-[0_3px_12px_rgba(0,0,0,0.95)]"
         >
           Hand-selected certified supercars with factory Monroney specs & 3D virtual perspective stage.
         </motion.p>
@@ -148,10 +143,10 @@ export const HeroBanner = ({ onOpen3DStage, onOpenVideoStudio }) => {
               const el = document.getElementById('cinema-deck') || document.getElementById('inventory-grid');
               if (el) el.scrollIntoView({ behavior: 'smooth' });
             }}
-            className="group relative px-8 py-4 rounded-2xl bg-gradient-to-r from-red-600 via-red-500 to-amber-600 text-white font-extrabold text-xs uppercase tracking-widest transition-all duration-300 cursor-pointer shadow-[0_0_35px_rgba(239,68,68,0.7)] hover:shadow-[0_0_55px_rgba(239,68,68,0.95)] hover:scale-105 active:scale-95 flex items-center gap-3 font-sans overflow-hidden border border-red-400/60"
+            className="group relative px-8 py-4 rounded-2xl bg-gradient-to-r from-[#8B5A2B] via-[#D4AF37] to-[#6E4520] hover:from-[#D4AF37] hover:to-[#8B5A2B] text-white font-extrabold text-xs uppercase tracking-widest transition-all duration-300 cursor-pointer shadow-[0_4px_25px_rgba(212,175,55,0.4)] hover:shadow-[0_4px_35px_rgba(212,175,55,0.6)] hover:scale-105 active:scale-95 flex items-center gap-3 font-sans overflow-hidden border border-[#D4AF37]/60"
           >
             <span className="relative z-10">BROWSE 3D PORTFOLIO</span>
-            <ArrowRight className="relative z-10 w-4 h-4 text-amber-200 group-hover:translate-x-1.5 transition-transform" />
+            <ArrowRight className="relative z-10 w-4 h-4 text-white group-hover:translate-x-1.5 transition-transform" />
           </button>
 
           <button
@@ -163,9 +158,9 @@ export const HeroBanner = ({ onOpen3DStage, onOpenVideoStudio }) => {
                 if (el) el.scrollIntoView({ behavior: 'smooth' });
               }
             }}
-            className="px-7 py-4 rounded-2xl bg-black/60 hover:bg-black/80 backdrop-blur-xl border border-amber-500/50 text-amber-300 hover:text-amber-200 font-extrabold text-xs uppercase tracking-widest transition-all duration-300 cursor-pointer shadow-[0_8px_32px_rgba(0,0,0,0.5)] hover:shadow-[0_0_35px_rgba(245,158,11,0.6)] hover:scale-105 active:scale-95 flex items-center gap-2.5 font-sans"
+            className="px-7 py-4 rounded-2xl bg-[#120E13]/85 hover:bg-[#120E13] backdrop-blur-xl border border-[#D4AF37]/60 text-[#F5E6C8] hover:text-white font-extrabold text-xs uppercase tracking-widest transition-all duration-300 cursor-pointer shadow-[0_4px_25px_rgba(0,0,0,0.6)] hover:scale-105 active:scale-95 flex items-center gap-2.5 font-sans"
           >
-            <Layers className="w-4 h-4 text-amber-400" />
+            <Layers className="w-4 h-4 text-[#D4AF37]" />
             <span>LAUNCH 3D SHOWROOM</span>
           </button>
         </motion.div>
@@ -173,7 +168,7 @@ export const HeroBanner = ({ onOpen3DStage, onOpenVideoStudio }) => {
       </div>
 
       {/* Floating Bottom-Right Video Play/Pause & Sound Controls */}
-      <div className="absolute bottom-6 right-6 z-20 flex items-center gap-3 bg-black/70 border border-white/20 p-2 rounded-full backdrop-blur-xl shadow-2xl">
+      <div className="absolute bottom-6 right-6 z-20 flex items-center gap-3 bg-[#120E13]/85 border border-[#D4AF37]/40 p-2 rounded-full backdrop-blur-xl shadow-2xl">
         <button
           type="button"
           onClick={toggleBgPlay}
@@ -189,7 +184,7 @@ export const HeroBanner = ({ onOpen3DStage, onOpenVideoStudio }) => {
           className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/30 border border-white/20 text-white flex items-center justify-center transition-all cursor-pointer"
           title={isBgMuted ? "Unmute Audio" : "Mute Audio"}
         >
-          {isBgMuted ? <VolumeX className="w-4 h-4 text-amber-400" /> : <Volume2 className="w-4 h-4 text-emerald-400 animate-pulse" />}
+          {isBgMuted ? <VolumeX className="w-4 h-4 text-[#D4AF37]" /> : <Volume2 className="w-4 h-4 text-emerald-400 animate-pulse" />}
         </button>
       </div>
 
@@ -198,3 +193,5 @@ export const HeroBanner = ({ onOpen3DStage, onOpenVideoStudio }) => {
 };
 
 export default HeroBanner;
+
+
